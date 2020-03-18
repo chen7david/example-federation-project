@@ -10,12 +10,14 @@ module.exports = {
         next(error('invalid', 'request'))
     },
 
+
+
     validationHandler: (err, req, res, next) => {
         if(!(err instanceof ValidationError)) next()
         
-        const { validation } = req.tools
+        const { validation, cargo } = req.tools
         const { details, _original } = err
-
+        
         const USD = [
             'any.required',
             'string.empty',
@@ -31,7 +33,6 @@ module.exports = {
             'any.only'
         ]
        
-
         for (let detail of details) {
             const { type, context: { label, key, limit, valids } } = detail
             let ref = valids ? valids[0].key : null

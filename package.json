@@ -22,7 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-joi-validators": "^1.0.1",
-    "express-notify-io": "0.0.1",
+    "express-notify-io": "0.0.2",
     "express-promise-router": "^3.0.3",
     "funx-js": "0.0.13",
     "jsonwebtoken": "^8.5.1",
