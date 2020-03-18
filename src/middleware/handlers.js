@@ -10,14 +10,14 @@ module.exports = {
         next(error('invalid', 'request'))
     },
 
-
-
     validationHandler: (err, req, res, next) => {
         if(!(err instanceof ValidationError)) next()
         
         const { validation, cargo } = req.tools
         const { details, _original } = err
-        
+
+        // validation.originalTo(_original)
+        dd({validation, details})
         const USD = [
             'any.required',
             'string.empty',
@@ -45,6 +45,7 @@ module.exports = {
 
     errorHandler: (err, req, res, next) => {
         const { cargo, error } = req.tools
+        dd({error})
         const errId = cargo.serial
         let msg = null
 

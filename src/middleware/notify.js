@@ -1,4 +1,4 @@
-const { SchemaBuilder } = require('notify-io')
+const { Notify, SchemaBuilder } = require('notify-io')
 const { DefaultSchema, JoiSchema, ObjectionSchema } = require('notify-io-schemas')
 
 
@@ -8,6 +8,8 @@ const schema = new SchemaBuilder().merege({
     ObjectionSchema: ObjectionSchema(SchemaBuilder),
 })
 
-const notifyStatusTo = require('express-notify-io')(schema)
+const instance = () => new Notify(schema)
+
+const notifyStatusTo = require('express-notify-io')(instance)
 
 module.exports = { notifyStatusTo }
