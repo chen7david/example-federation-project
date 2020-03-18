@@ -54,7 +54,7 @@ module.exports = {
             dd({errId:'ER' + errId, err})
         }
 
-        cargo.default = msg.langTo('zh').render()
+        cargo.default = msg.langTo('en').render()
     
         res.status(200).json(cargo)
     },

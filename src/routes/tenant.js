@@ -3,6 +3,6 @@ const controller = require('./../controller/tenant')
 const { validateBody, schema } = require('../middleware/validation')
 
 router.route('/')
-    .get(validateBody(schema.tenant.create), controller.index)
+    .post(validateBody(schema.tenant.create), controller.index)
 
 module.exports = router
