@@ -1,7 +1,8 @@
 const { validateHeader, validateBody } = require('express-joi-validators')
 
 const schema = {
-    user: require('./UserSchema')
+    tenant: require('./TenantSchema'),
+    user: require('./UserSchema'),
 }
 
 module.exports = {

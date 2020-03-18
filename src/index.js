@@ -6,6 +6,7 @@ const { notifyStatusTo } = require('./middleware/notify')
 const { invalidHandler, errorHandler } = require('./middleware/handlers')
 const { cargo } = require('cargo-io')
 const cors = require('cors')
+const routes = require('./routes')
 const { dd } = require('funx-js')
 
 // APP MIDDLEWARE
@@ -17,7 +18,7 @@ app.use(notifyStatusTo('error'))
 app.use(notifyStatusTo('validation'))
 
 // APP ROUTES
-// here ...
+app.use(routes.tenant)
 
 // ERROR HANDLERS
 app.use(invalidHandler)
