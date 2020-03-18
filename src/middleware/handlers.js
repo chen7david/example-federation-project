@@ -17,7 +17,7 @@ module.exports = {
         const { details, _original } = err
 
         validation().originalTo(_original)
-
+        water
         const USD = [
             'any.required',
             'string.empty',
@@ -45,16 +45,18 @@ module.exports = {
 
     errorHandler: (err, req, res, next) => {
         const { cargo, error } = req.tools
-        dd({error})
+
         const errId = cargo.serial
         let msg = null
 
         if(err instanceof Notify) msg = err
-        if(!msg) msg = error('unknown', errId)
-        
+        if(!msg) {
+            msg = error('unknown', errId)
+            dd({errId:'ER' + errId, err})
+        }
+
         cargo.default = msg.langTo('zh').render()
-        
-        dd({errId:'ER' + errId, err})
+    
         res.status(200).json(cargo)
     },
 }
