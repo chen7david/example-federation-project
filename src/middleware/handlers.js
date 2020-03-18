@@ -17,7 +17,6 @@ module.exports = {
         const { details, _original } = err
 
         validation().originalTo(_original)
-        water
         const USD = [
             'any.required',
             'string.empty',
