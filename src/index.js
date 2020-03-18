@@ -3,7 +3,7 @@ const app = express()
 const server = require('http').createServer(app)
 const port = require('./../config').app.port || 4000
 const { notifyStatusTo } = require('./middleware/notify')
-const { invalidHandler, errorHandler } = require('./middleware/handlers')
+const { invalidHandler, errorHandler, validationHandler } = require('./middleware/handlers')
 const { cargo } = require('cargo-io')
 const cors = require('cors')
 const routes = require('./routes')
@@ -21,6 +21,7 @@ app.use(notifyStatusTo('validation'))
 app.use(routes.tenant)
 
 // ERROR HANDLERS
+app.use(validationHandler)
 app.use(invalidHandler)
 app.use(errorHandler)
 
