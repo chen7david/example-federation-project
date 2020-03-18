@@ -13,7 +13,7 @@ module.exports = {
     validationHandler: (err, req, res, next) => {
         if(!(err instanceof ValidationError)) next()
         
-        const { validation, cargo } = req.tools
+        const { validation } = req.tools
         const { details, _original } = err
 
         validation().originalTo(_original)
