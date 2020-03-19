@@ -1,11 +1,11 @@
 const Model = require('./Model')
+const { serialChar } = require('funx-js')
 
 class Community extends Model {
 
     async $beforeInsert(context){
         await super.$beforeInsert(context)
-        this.client_id = this.hash().md5
-        this.client_secret = this.hash().md5
+        this.client_id = serialChar("CL00-0000-00000-0000-000000")
     }
 
     static get relationMappings(){ 

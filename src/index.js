@@ -9,6 +9,8 @@ const cors = require('cors')
 const routes = require('./routes')
 const { dd, serialChar, serialInt, randChar, randEl, randInt } = require('funx-js')
 
+dd(serialChar("US0000000000"))
+
 // APP MIDDLEWARE
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true }))
