@@ -68,7 +68,7 @@ const main = async () => {
         .$relatedQuery('users')
         // .insert(data.user)
         .first()
-
+    await user.$sync('roles',[1,2,4])
     const token = await user
         .$relatedQuery('tokens')
         .insert({community_id: user.community_id })
@@ -78,11 +78,14 @@ const main = async () => {
         // .insert(data.role)
         .first()
 
+    await role.$sync('users',[1,2,4])
+    await role.$sync('permissions',[])
+    
     const permission = await community
         .$relatedQuery('permissions')
         // .insert(data.permission)
         .first()
-
+    await permission.$sync('roles',[1,2])
     
 
     dd({cluster, community, user, role, permission, token})
