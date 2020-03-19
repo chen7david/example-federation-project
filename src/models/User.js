@@ -1,5 +1,6 @@
 const Model = require('./Model')
 const bcrypt = require('bcrypt')
+const BCRYPT_ROUNDS = 12
 
 class User extends Model {
  

@@ -2,8 +2,6 @@ const knexfile = require('./knexfile').development
 const knex = require('knex')(knexfile)
 const OM = require('objection-mixin')
 const { Model } = require('objection')
-const bcrypt = require('bcrypt')
-const BCRYPT_ROUNDS = 12
 
 Model.knex(knex)
 
