@@ -9,7 +9,7 @@ const cors = require('cors')
 const routes = require('./routes')
 const { dd, serialChar, serialInt, randChar, randEl, randInt } = require('funx-js')
 
-dd(serialChar("US0000000000"))
+dd(serialChar("TO00-00000000-00000-00000"))
 
 // APP MIDDLEWARE
 app.use(express.json()) 
