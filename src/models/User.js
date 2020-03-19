@@ -33,7 +33,7 @@ class User extends Model {
                 modelClass: Community,
                 join:{
                     from:'users.community_id',
-                    to:'community.id'
+                    to:'communities.id'
                 }
             }, 
             roles:{

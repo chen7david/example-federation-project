@@ -14,7 +14,7 @@ class Role extends Model {
                 modelClass: Community,
                 join:{
                     from:'roles.community_id',
-                    to:'community.id'
+                    to:'communities.id'
                 }
             },
             users:{

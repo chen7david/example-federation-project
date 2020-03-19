@@ -13,7 +13,7 @@ class Permission extends Model {
                 modelClass: Community,
                 join:{
                     from:'permissions.community_id',
-                    to:'community.id'
+                    to:'communities.id'
                 }
             },
             roles:{

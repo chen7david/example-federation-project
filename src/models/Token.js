@@ -10,9 +10,18 @@ class Token extends Model {
     
     static get relationMappings(){   
         
+        const Community = require('./Community')
         const User = require('./User')
         
         return {
+            community:{
+                relation: Model.BelongsToOneRelation,
+                modelClass: Community,
+                join:{
+                    from:'communities.id',
+                    to:'tokens.community_id'
+                }
+            },
             user:{
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
