@@ -26,6 +26,7 @@ class User extends Model {
         
         const Community = require('./Community')
         const Role = require('./Role')
+        const Token = require('./Token')
         
         return {
             community:{
@@ -34,6 +35,14 @@ class User extends Model {
                 join:{
                     from:'users.community_id',
                     to:'communities.id'
+                }
+            },
+            tokens:{
+                relation: Model.HasManyRelation,
+                modelClass: Token,
+                join:{
+                    from:'users.id',
+                    to:'tokens.user_id'
                 }
             }, 
             roles:{

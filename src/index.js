@@ -49,29 +49,43 @@ const data = {
     },
     permission: {
         resource_name: serialChar("0000000"),
-        actions: serialChar("0000000")
+        action: serialChar("0000000")
     }, 
     token: {}  
 }
 
 const main = async () => {
-    const obj = await Cluster
+    const cluster = await Cluster
         .getById(1)
         // .query()
         // .insert(data.cluster)
-    const child = await obj
+    const community = await cluster
         .$relatedQuery('communities')
-        .insert(data.community)
+        // .insert(data.community)
+        .first()
 
-    const child1 = await child
+    const user = await community
         .$relatedQuery('users')
-        .insert(data.user)
-    dd({obj, child, child1})
+        // .insert(data.user)
+        .first()
 
-    const child2 = await child
+    const token = await user
+        .$relatedQuery('tokens')
+        .insert({community_id: user.community_id })
+
+    const role = await community
         .$relatedQuery('roles')
-        .insert(data.role)
-    dd({obj, child, child1, child2})
+        // .insert(data.role)
+        .first()
+
+    const permission = await community
+        .$relatedQuery('permissions')
+        // .insert(data.permission)
+        .first()
+
+    
+
+    dd({cluster, community, user, role, permission, token})
 }
 
 main()

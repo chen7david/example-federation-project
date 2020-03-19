@@ -14,6 +14,7 @@ class Community extends Model {
         const Token = require('./Token')
         const User = require('./User')
         const Role = require('./Role')
+        const Permission = require('./Permission')
 
         return {
             cluster:{
@@ -46,6 +47,14 @@ class Community extends Model {
                 join:{
                     from:'communities.id',
                     to:'roles.community_id'
+                }
+            },
+            permissions:{
+                relation: Model.HasManyRelation,
+                modelClass: Permission,
+                join:{
+                    from:'communities.id',
+                    to:'permissions.community_id'
                 }
             }
         }
