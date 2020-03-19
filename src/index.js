@@ -68,6 +68,7 @@ const main = async () => {
         .$relatedQuery('users')
         // .insert(data.user)
         .first()
+    const tokens = await user.$relatedQuery('tokens')
     await user.$sync('roles',[1,2,4])
     const token = await user
         .$relatedQuery('tokens')
@@ -88,7 +89,7 @@ const main = async () => {
     await permission.$sync('roles',[1,2])
     
 
-    dd({cluster, community, user, role, permission, token})
+    dd({cluster, community, user, role, permission, token, tokens})
 }
 
 main()
