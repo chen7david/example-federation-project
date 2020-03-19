@@ -13,6 +13,7 @@ class Community extends Model {
         const Cluster = require('./Cluster')
         const Token = require('./Token')
         const User = require('./User')
+        const Role = require('./Role')
 
         return {
             cluster:{
@@ -39,6 +40,14 @@ class Community extends Model {
                     to:'tokens.community_id'
                 }
             },
+            roles:{
+                relation: Model.HasManyRelation,
+                modelClass: Role,
+                join:{
+                    from:'communities.id',
+                    to:'roles.community_id'
+                }
+            }
         }
     }
 }

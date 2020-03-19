@@ -56,9 +56,22 @@ const data = {
 
 const main = async () => {
     const obj = await Cluster
-        .query()
+        .getById(1)
+        // .query()
         // .insert(data.cluster)
-    dd({obj})
+    const child = await obj
+        .$relatedQuery('communities')
+        .insert(data.community)
+
+    const child1 = await child
+        .$relatedQuery('users')
+        .insert(data.user)
+    dd({obj, child, child1})
+
+    const child2 = await child
+        .$relatedQuery('roles')
+        .insert(data.role)
+    dd({obj, child, child1, child2})
 }
 
 main()
