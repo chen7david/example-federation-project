@@ -7,9 +7,7 @@ const { invalidHandler, errorHandler, validationHandler } = require('./middlewar
 const { cargo } = require('cargo-io')
 const cors = require('cors')
 const routes = require('./routes')
-const { dd } = require('funx-js')
-
-
+const { dd, serialChar } = require('funx-js')
 
 // APP MIDDLEWARE
 app.use(express.json()) 
@@ -29,3 +27,38 @@ app.use(errorHandler)
 
 server.listen(port, () => 
     dd(`sever running at http://localhost:${port}`))
+
+
+
+const { Cluster, Community, User, Role, Permission, Token } = require('./models')
+const data = {
+    cluster: {
+        name: serialChar("0000000"),
+        // name: 'duplicate'
+    },
+    community: {
+        name: serialChar("0000000"),
+        // name: 'duplicate'
+    },
+    user: {
+        username: serialChar("0000000"),
+        password: "888888"
+    },
+    role: {
+        name: serialChar("0000000")
+    },
+    permission: {
+        resource_name: serialChar("0000000"),
+        actions: serialChar("0000000")
+    }, 
+    token: {}  
+}
+
+const main = async () => {
+    const obj = await Cluster
+        .query()
+        // .insert(data.cluster)
+    dd({obj})
+}
+
+main()

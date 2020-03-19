@@ -1,4 +1,4 @@
-const knexfile = require('./knexfile').development
+const knexfile = require('./../../knexfile').development
 const knex = require('knex')(knexfile)
 const OM = require('objection-mixin')
 const { Model } = require('objection')
