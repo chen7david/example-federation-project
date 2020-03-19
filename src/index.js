@@ -55,41 +55,48 @@ const data = {
 }
 
 const main = async () => {
-    const cluster = await Cluster
-        .getById(1)
+    const user = await User
+        .query()
+        .where('userId', 'US3XBAUU1VCX')
+        .first()
+
+    dd({user})
+
+    // const cluster = await Cluster
+        // .getById(1)
         // .query()
         // .insert(data.cluster)
-    const community = await cluster
-        .$relatedQuery('communities')
-        // .insert(data.community)
-        .first()
+    // const community = await cluster
+    //     .$relatedQuery('communities')
+    //     .insert(data.community)
+    //     .first()
 
-    const user = await community
-        .$relatedQuery('users')
-        // .insert(data.user)
-        .first()
-    const tokens = await user.$relatedQuery('tokens')
-    await user.$sync('roles',[1,2,4])
-    const token = await user
-        .$relatedQuery('tokens')
-        .insert({community_id: user.community_id })
+    // const user = await community
+    //     .$relatedQuery('users')
+    //     .insert(data.user)
+    //     .first()
+    // const tokens = await user.$relatedQuery('tokens')
+    // await user.$sync('roles',[1,2,4])
+    // const token = await user
+    //     .$relatedQuery('tokens')
+    //     .insert({community_id: user.community_id })
 
-    const role = await community
-        .$relatedQuery('roles')
-        // .insert(data.role)
-        .first()
+    // const role = await community
+    //     .$relatedQuery('roles')
+    //     .insert(data.role)
+    //     .first()
 
-    await role.$sync('users',[1,2,4])
-    await role.$sync('permissions',[])
+    // await role.$sync('users',[1,2,4])
+    // await role.$sync('permissions',[])
     
-    const permission = await community
-        .$relatedQuery('permissions')
-        // .insert(data.permission)
-        .first()
-    await permission.$sync('roles',[1,2])
+    // const permission = await community
+    //     .$relatedQuery('permissions')
+    //     .insert(data.permission)
+    //     .first()
+    // await permission.$sync('roles',[1,2])
     
 
-    dd({cluster, community, user, role, permission, token, tokens})
+    // dd({cluster, community, user, role, permission, token, tokens})
 }
 
 main()
