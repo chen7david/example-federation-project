@@ -6,8 +6,17 @@ class Role extends Model {
         
         const Community = require('./Community')
         const User = require('./User')
+        const Permission = require('./Permission')
         
         return {
+            community:{
+                relation: Model.BelongsToOneRelation,
+                modelClass: Community,
+                join:{
+                    from:'roles.community_id',
+                    to:'community.id'
+                }
+            },
             users:{
                 relation: Model.ManyToManyRelation,
                 modelClass: User,
@@ -19,7 +28,19 @@ class Role extends Model {
                         to:'user_roles.user_id'
                     }
                 }
-            } 
+            },
+            permissions:{
+                relation: Model.ManyToManyRelation,
+                modelClass: Permission,
+                join:{
+                    from:'roles.id',
+                    to:'permissions.id',
+                    through:{
+                        from:'role_permissions.role_id',
+                        to:'role_permissions.permission_id'
+                    }
+                }
+            }  
         }
     }
 }

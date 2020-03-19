@@ -7,9 +7,9 @@ const { invalidHandler, errorHandler, validationHandler } = require('./middlewar
 const { cargo } = require('cargo-io')
 const cors = require('cors')
 const routes = require('./routes')
-const { dd, serialChar, serialInt, randChar, randEl, randInt } = require('funx-js')
+const { dd } = require('funx-js')
 
-dd(serialChar("TO00-00000000-00000-00000"))
+
 
 // APP MIDDLEWARE
 app.use(express.json()) 

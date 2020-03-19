@@ -21,6 +21,36 @@ class User extends Model {
     async verifyPassword(password){
         return await bcrypt.compare(password, this.password)    
     }
+
+    static get relationMappings(){   
+        
+        const Community = require('./Community')
+        const Role = require('./Role')
+        
+        return {
+            community:{
+                relation: Model.BelongsToOneRelation,
+                modelClass: Community,
+                join:{
+                    from:'users.community_id',
+                    to:'community.id'
+                }
+            }, 
+            roles:{
+                relation: Model.ManyToManyRelation,
+                modelClass: Role,
+                join:{
+                    from:'users.id',
+                    to:'roles.id',
+                    through:{
+                        from:'user_roles.user_id',
+                        to:'user_roles.role_id'
+                    }
+                }
+            } 
+        }
+    }
+    
  
 }
 

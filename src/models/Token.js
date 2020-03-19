@@ -1,4 +1,5 @@
 const Model = require('./Model')
+const { serialChar } = require('funx-js')
 
 class Token extends Model {
 
