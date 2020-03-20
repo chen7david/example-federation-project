@@ -7,8 +7,8 @@ const { validateBody, schema } = require('../middleware/validation')
 router.param('id', objectById(Cluster))
 
 router.route('/auth/clusters')
-    // .get(controller.index)
-    .get(validateBody(schema.tenant.create), controller.index)
+    .get(controller.index)
+    .post(validateBody(schema.cluster.create), controller.create)
 
 router.route('/auth/clusters/:id')
     .get(controller.view)
