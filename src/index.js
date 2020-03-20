@@ -29,6 +29,7 @@ server.listen(port, () =>
     dd(`sever running at http://localhost:${port}`))
 
 
+const main = async () => {
 
 const { Cluster, Community, User, Role, Permission, Token } = require('./models')
 const data = {
@@ -54,27 +55,28 @@ const data = {
     token: {}  
 }
 
-const main = async () => {
-    const user = await User
-        .query()
-        .where('userId', 'US3XBAUU1VCX')
-        .first()
-
-    dd({user})
+    // const user = await User
+        // .query()
+        // .withGraphFetched('community.[cluster]')
+        // .where('userId', 'US3XBAUU1VCX')
+        // .first()
+        // .getEagerByKey('id',3)
+    // const comm = await user.$relatedQuery('com')
+    // dd({user})
 
     // const cluster = await Cluster
-        // .getById(1)
+    //     .getById(3)
         // .query()
         // .insert(data.cluster)
     // const community = await cluster
     //     .$relatedQuery('communities')
     //     .insert(data.community)
-    //     .first()
+        // .first()
 
     // const user = await community
     //     .$relatedQuery('users')
     //     .insert(data.user)
-    //     .first()
+        // .first()
     // const tokens = await user.$relatedQuery('tokens')
     // await user.$sync('roles',[1,2,4])
     // const token = await user
@@ -99,4 +101,4 @@ const main = async () => {
     // dd({cluster, community, user, role, permission, token, tokens})
 }
 
-main()
+// main()

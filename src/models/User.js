@@ -22,6 +22,15 @@ class User extends Model {
         return await bcrypt.compare(password, this.password)    
     }
 
+    static async getEagerByKey(key, value){
+        const user = await this
+        .query()
+        .withGraphFetched('community.[cluster]')
+        .where(key, value)
+        .first()
+        return user
+    }
+
     static get relationMappings(){   
         
         const Community = require('./Community')
