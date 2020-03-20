@@ -4,6 +4,6 @@ const { validateBody, schema } = require('../middleware/validation')
 
 router.route('/auth/cluster/:id/communities')
     .get(controller.index)
-    .get(validateBody(schema.tenant.create), controller.index)
+    .get(validateBody(schema.community.create), controller.index)
 
 module.exports = router
