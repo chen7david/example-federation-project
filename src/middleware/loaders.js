@@ -18,16 +18,4 @@ module.exports = {
             return next()
         }
     },
-
-    testLoader: async (req, res, next, id) => {
-        try {
-            
-            throw('dd')
-            dd({id})
-            next()
-        } catch (error) {
-            dd('dddd')
-            return next('error is in test param')
-        }
-    }
 }

@@ -7,7 +7,6 @@ module.exports = {
 
     invalidHandler: (req, res, next) => {
         const { error } = req.tools
-        dd('invalidHandler')
         next(error('invalid', 'request'))
     },
 
@@ -39,11 +38,10 @@ module.exports = {
             if(MSD.includes(type)) validation(type, { label, limit, ref }, key)
         }
 
-        next(validation())
+        return next(validation())
     },
 
     errorHandler: (err, req, res, next) => {
-        dd('errorHandler')
         const { cargo, error } = req.tools
         const errId = cargo.serial
         let msg = null
