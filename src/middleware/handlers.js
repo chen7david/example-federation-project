@@ -10,6 +10,13 @@ module.exports = {
         next(error('invalid', 'request'))
     },
 
+    dbHandler: (err, req, res, next) => {
+        if(!(err instanceof UniqueViolationError)) return next(err)
+            const { validation } = req.tools
+            let key = err.columns.pop()
+            validation('UniqueViolationError', key, key)
+        return next(validation())
+    },
     validationHandler: (err, req, res, next) => {
         if(!(err instanceof ValidationError)) return next(err)
         const { validation } = req.tools

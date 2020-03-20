@@ -9,7 +9,6 @@ const schema = new SchemaBuilder().merege({
 })
 
 const instance = () => new Notify(schema)
-
 const notifyStatusTo = require('express-notify-io')(instance)
 
 module.exports = { notifyStatusTo }

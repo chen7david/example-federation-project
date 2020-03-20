@@ -20,7 +20,16 @@ class BaseModel extends OM(Model) {
         delete json.user_id
         delete json.password
         json.created_at = json.created_at.toLocaleString()
+        json.updated_at = json.updated_at.toLocaleString()
         return json
+    }
+
+    static async create(object){
+        const result = await super
+            .query()
+            .insert(object)
+            .returning('*')
+        return result
     }
  
 }

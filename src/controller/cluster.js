@@ -17,7 +17,11 @@ module.exports = {
     },
 
     create: async (req, res, next) => {
-        const { cargo } = req.tools
+        const { cargo, info } = req.tools
+        const { body } = req.ctx
+        const object = await Cluster.create(body)
+        cargo.payload = object
+        cargo.details = info('created', 'cluster').render()
         res.status(200).json(cargo)
     },
 
