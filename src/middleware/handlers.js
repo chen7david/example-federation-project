@@ -7,11 +7,12 @@ module.exports = {
 
     invalidHandler: (req, res, next) => {
         const { error } = req.tools
+        dd('invalidHandler')
         next(error('invalid', 'request'))
     },
 
     validationHandler: (err, req, res, next) => {
-        if(!(err instanceof ValidationError)) return next()
+        if(!(err instanceof ValidationError)) return next(err)
         const { validation } = req.tools
         const { details, _original } = err
 
@@ -42,8 +43,8 @@ module.exports = {
     },
 
     errorHandler: (err, req, res, next) => {
+        dd('errorHandler')
         const { cargo, error } = req.tools
-
         const errId = cargo.serial
         let msg = null
 
@@ -55,6 +56,6 @@ module.exports = {
 
         cargo.default = msg.langTo('en').render()
 
-        res.status(200).json(cargo)
+        res.status(500).json(cargo)
     },
 }
