@@ -16,6 +16,7 @@ module.exports = {
         const { details, _original } = err
 
         validation().originalTo(_original)
+        
         const USD = [
             'any.required',
             'string.empty',
@@ -48,8 +49,8 @@ module.exports = {
 
         if(err instanceof Notify) msg = err
         if(!msg) {
-            msg = error('unknown', errId)
             dd({errId:'ER' + errId, err})
+            msg = error('unknown', errId)
         }
 
         cargo.default = msg.langTo('en').render()
