@@ -10,6 +10,8 @@ module.exports = {
 
     view: async (req, res, next) => {
         const { cargo } = req.tools
+        const { param } = req.ctx
+        cargo.details = param.cluster
         res.status(200).json(cargo)
     },
 
