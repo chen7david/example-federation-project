@@ -6,6 +6,7 @@ const { notifyStatusTo } = require('./middleware/notify')
 const { invalidHandler, errorHandler, validationHandler } = require('./middleware/handlers')
 const { cargo } = require('cargo-io')
 const cors = require('cors')
+const { requireAuth } = require('./middleware/check')
 const routes = require('./routes')
 const { dd, serialChar } = require('funx-js')
 
@@ -17,13 +18,17 @@ app.use(cargo())
 app.use(notifyStatusTo('error'))
 app.use(notifyStatusTo('validation'))
 
+// REQUEST CHECKS
+app.use('/auth', requireAuth)
+
 // APP ROUTES
-app.use(routes.tenant)
+app.use(routes.cluster)
 
 // ERROR HANDLERS
-app.use(validationHandler)
+// app.use(validationHandler)
 app.use(invalidHandler)
 app.use(errorHandler)
+
 
 server.listen(port, () => 
     dd(`sever running at http://localhost:${port}`))
@@ -64,10 +69,10 @@ const data = {
     // const comm = await user.$relatedQuery('com')
     // dd({user})
 
-    // const cluster = await Cluster
+    const cluster = await Cluster
     //     .getById(3)
-        // .query()
-        // .insert(data.cluster)
+        .query()
+        .insert(data.cluster)
     // const community = await cluster
     //     .$relatedQuery('communities')
     //     .insert(data.community)

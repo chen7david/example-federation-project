@@ -1,3 +1,3 @@
 module.exports = {
-    tenant: require('./tenant')
+    cluster: require('./cluster')
 }
