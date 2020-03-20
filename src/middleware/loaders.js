@@ -6,12 +6,12 @@ module.exports = {
         return next()
     },
 
-    objectById: (Model) => (req, res, next, id) => { 
-        // let key = Model.name.toLowerCase()
-        // const object =  Model.getById(id)
-        if(true) {
+    objectById: (Model) => async (req, res, next, id) => { 
+        let key = Model.name.toLowerCase()
+        const object = await Model.getById(id)
+        if(!object) {
             const { error } = req.tools
-            next(error('invalid',  ' id'))
+            next(error('invalid', key + ' id'))
         }else{
             if(!req.ctx.param) req.ctx.param = {}
             req.ctx.param[key] = object

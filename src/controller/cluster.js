@@ -12,6 +12,7 @@ module.exports = {
         const { cargo } = req.tools
         const { param } = req.ctx
         cargo.details = param.cluster
+        dd(param)
         res.status(200).json(cargo)
     },
 
