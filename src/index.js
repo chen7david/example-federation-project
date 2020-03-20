@@ -36,8 +36,6 @@ app.use(validationHandler)
 app.use(invalidHandler)
 app.use(errorHandler)
 
-
-
 server.listen(port, () => 
     dd(`sever running at http://localhost:${port}`))
 
