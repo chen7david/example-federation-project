@@ -6,8 +6,7 @@ module.exports = {
         next()
     },
 
-    objectById: (Model) => async (req, res, next, id) =>{
-        
+    objectById: (Model) => async (req, res, next, id) =>{ 
         let key = Model.name.toLowerCase()
         const object = await Model.getById(id)
         if(!object) {
@@ -16,7 +15,7 @@ module.exports = {
         }else{
             if(!req.ctx.param) req.ctx.param = {}
             req.ctx.param[key] = object
+            return next()
         }
-        next()
     },
 }
