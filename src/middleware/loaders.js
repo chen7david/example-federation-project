@@ -3,6 +3,8 @@ module.exports = {
 
     loadContext: (req, res, next) =>{ 
         if(!req.ctx) req.ctx = {}
+        // set lang on notifications
+        // req.tools.info().langTo('zh')
         return next()
     },
 
