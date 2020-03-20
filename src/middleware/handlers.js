@@ -60,7 +60,7 @@ module.exports = {
             msg = error('unknown', errId)
         }
 
-        cargo.default = msg.langTo('en').render()
+        cargo.details(msg.render())
 
         res.status(500).json(cargo)
     },
