@@ -19,13 +19,13 @@ app.use(notifyStatusTo('error'))
 app.use(notifyStatusTo('validation'))
 
 // REQUEST CHECKS
-app.use('/auth', requireAuth)
+// app.use('/auth', requireAuth)
 
 // APP ROUTES
 app.use(routes.cluster)
 
 // ERROR HANDLERS
-// app.use(validationHandler)
+app.use(validationHandler)
 app.use(invalidHandler)
 app.use(errorHandler)
 

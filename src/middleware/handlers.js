@@ -7,7 +7,6 @@ module.exports = {
 
     invalidHandler: (req, res, next) => {
         const { error } = req.tools
-        dd(555)
         next(error('invalid', 'request'))
     },
 
