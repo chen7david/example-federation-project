@@ -5,7 +5,7 @@ module.exports = {
     index: async (req, res, next) => {
         const { cargo } = req.tools
         const { param } = req.ctx
-        const permissions = await param.permission.$relatedQuery('permissions')
+        const permissions = await param.community.$relatedQuery('permissions')
         cargo.payload(permissions)
         res.status(200).json(cargo)
     },
