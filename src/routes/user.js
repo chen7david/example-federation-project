@@ -14,7 +14,7 @@ router.route('/auth/community/:communityId/users')
 
 router.route('/auth/community/:communityId/users/:userId')
     .get(controller.view)
-    .patch(validateBody(schema.user.update), controller.patch)
+    .patch(validateBody(schema.user.patch), controller.patch)
     .delete(controller.delete)
     
 

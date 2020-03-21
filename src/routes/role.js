@@ -11,6 +11,10 @@ router.param('roleId', objectById(Role))
 
 router.route('/auth/community/:communityId/roles')
     .get(controller.index)
-    // .get(validateBody(schema.tenant.create), controller.index)
+    .post(validateBody(schema.role.create), controller.create)
+
+router.route('/auth/community/:communityId/roles/:roleId')
+    .get(controller.view)
+    .patch(validateBody(schema.role.patch), controller.patch)
 
 module.exports = router

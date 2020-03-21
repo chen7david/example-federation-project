@@ -10,7 +10,7 @@ module.exports = {
         disabled: Joi.boolean(),
     }),
 
-    update: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
+    patch: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
         username: Joi.string().lowercase(),
         password: Joi.string().min(6).max(120),
         verified: Joi.boolean(),
