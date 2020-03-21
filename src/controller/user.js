@@ -65,14 +65,12 @@ module.exports = {
 
     syncRoles: async (req, res, next) => {
         const { cargo, info, error } = req.tools
-        const { $user, param } = req.ctx
-        
-        if(param.user.id == $user.id) return next(error('forbidden','operation'))
-        const deleted = await param.user
-            .$query()
-            .delete()
+        const { param, body } = req.ctx
+        dd({body})
+        const roles = await param.user.$sync('roles', body.roleIds)
+        dd(roles)
         cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'user').render())
+        cargo.details(info('updated', 'user-roles').render())
         res.status(200).json(cargo)
     },
 }

@@ -41,7 +41,7 @@ module.exports = {
                 .where('id', id)
                 .andWhere('community_id', param.community.id)
                 .first()
-dd({object})
+                
             if(!object) {
                 const { error } = req.tools
                 next(error('invalid', key + ' id'))

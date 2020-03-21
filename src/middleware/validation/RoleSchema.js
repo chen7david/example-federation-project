@@ -18,7 +18,7 @@ module.exports = {
     }),
 
     syncPermissions: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
-        permissionIds: Joi.array(),
+        permissionIds: Joi.array().required(),
     }),
     
 }

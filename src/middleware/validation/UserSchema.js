@@ -18,6 +18,6 @@ module.exports = {
     }),
 
     syncRoles: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
-        roleIds: Joi.array(),
+        roleIds: Joi.array().required(),
     }),    
 }
