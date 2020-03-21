@@ -7,7 +7,7 @@ const { invalidHandler, errorHandler, validationHandler, dbHandler } = require('
 const { cargo } = require('cargo-io')
 const cors = require('cors')
 const { requireAuth } = require('./middleware/check')
-const { loadContext } = require('./middleware/loaders')
+const { setContext, Authenticate } = require('./middleware/loaders')
 const routes = require('./routes')
 const { dd, serialChar } = require('funx-js')
 
@@ -19,10 +19,11 @@ app.use(cargo())
 app.use(notifyStatusTo('info'))
 app.use(notifyStatusTo('error'))
 app.use(notifyStatusTo('validation'))
-app.use(loadContext)
+app.use(setContext)
 
 // REQUEST CHECKS
-// app.use('/auth', requireAuth)
+app.use('/auth', Authenticate)
+app.use('/auth', requireAuth)
 
 // APP ROUTES
 app.use(routes.cluster)
