@@ -15,4 +15,13 @@ router.route('/auth/communities/:communityId')
     .patch(validateBody(schema.community.patch), controller.patch)
     .delete(controller.delete)
 
+router.route('/auth/community-roles/:communityId')
+    .get(controller.getRoles)
+
+router.route('/auth/community-permissions/:communityId')
+    .get(controller.getPermissions)
+
+router.route('/auth/community-tokens/:communityId')
+    .get(controller.getTokens)
+
 module.exports = router

@@ -52,4 +52,52 @@ module.exports = {
         cargo.details(info('deleted', 'role').render())
         res.status(200).json(cargo)
     },
+
+    getUsers: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { param } = req.ctx
+        if(param.role.root) return next(error('forbidden','operation'))
+        const deleted = await param.role
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'role').render())
+        res.status(200).json(cargo)
+    },
+
+    syncUsers: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { param } = req.ctx
+        if(param.role.root) return next(error('forbidden','operation'))
+        const deleted = await param.role
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'role').render())
+        res.status(200).json(cargo)
+    },
+
+    getPermissions: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { param } = req.ctx
+        if(param.role.root) return next(error('forbidden','operation'))
+        const deleted = await param.role
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'role').render())
+        res.status(200).json(cargo)
+    },
+
+    syncPermissions: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { param } = req.ctx
+        if(param.role.root) return next(error('forbidden','operation'))
+        const deleted = await param.role
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'role').render())
+        res.status(200).json(cargo)
+    },
 }

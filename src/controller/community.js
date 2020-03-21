@@ -53,4 +53,31 @@ module.exports = {
         cargo.details(info('deleted', 'community').render())
         res.status(200).json(cargo)
     },
+
+    getRoles: async (req, res, next) => {
+        const { cargo } = req.tools
+        const { param } = req.ctx
+        const roles = await param.community
+            .$relatedQuery('roles')
+        cargo.payload(roles) 
+        res.status(200).json(cargo)
+    },
+
+    getPermissions: async (req, res, next) => {
+        const { cargo } = req.tools
+        const { param } = req.ctx
+        const permissions = await param.community
+            .$relatedQuery('permissions')
+        cargo.payload(permissions) 
+        res.status(200).json(cargo)
+    },
+
+    getTokens: async (req, res, next) => {
+        const { cargo } = req.tools
+        const { param } = req.ctx
+        const tokens = await param.community
+            .$relatedQuery('tokens')
+        cargo.payload(tokens) 
+        res.status(200).json(cargo)
+    },
 }

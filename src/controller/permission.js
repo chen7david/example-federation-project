@@ -51,4 +51,26 @@ module.exports = {
         cargo.details(info('deleted', 'permission').render())
         res.status(200).json(cargo)
     },
+
+    getRoles: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { param } = req.ctx
+        const deleted = await param.permission
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'permission').render())
+        res.status(200).json(cargo)
+    },
+
+    syncRoles: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { param } = req.ctx
+        const deleted = await param.permission
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'permission').render())
+        res.status(200).json(cargo)
+    },
 }

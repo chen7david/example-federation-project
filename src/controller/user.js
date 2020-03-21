@@ -53,4 +53,26 @@ module.exports = {
         cargo.details(info('deleted', 'user').render())
         res.status(200).json(cargo)
     },
+
+    getRoles: async (req, res, next) => {
+        const { cargo } = req.tools
+        const { param } = req.ctx
+        const roles = await param.user
+            .$relatedQuery('roles')
+        cargo.payload(roles) 
+        res.status(200).json(cargo)
+    },
+
+    syncRoles: async (req, res, next) => {
+        const { cargo, info, error } = req.tools
+        const { $user, param } = req.ctx
+        
+        if(param.user.id == $user.id) return next(error('forbidden','operation'))
+        const deleted = await param.user
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'user').render())
+        res.status(200).json(cargo)
+    },
 }

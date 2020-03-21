@@ -17,5 +17,8 @@ router.route('/auth/community/:communityId/users/:userId')
     .patch(validateBody(schema.user.patch), controller.patch)
     .delete(controller.delete)
     
+router.route('/auth/community/:communityId/user-roles/:userId')
+    .get(controller.getRoles)
+    .patch(validateBody(schema.user.syncRoles), controller.syncRoles)
 
 module.exports = router
