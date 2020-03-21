@@ -16,5 +16,6 @@ router.route('/auth/community/:communityId/roles')
 router.route('/auth/community/:communityId/roles/:roleId')
     .get(controller.view)
     .patch(validateBody(schema.role.patch), controller.patch)
+    .delete(controller.delete)
 
 module.exports = router
