@@ -43,6 +43,7 @@ module.exports = {
     delete: async (req, res, next) => {
         const { cargo, info, error } = req.tools
         const { $user, param } = req.ctx
+        // if is admin also don't delete
         if(param.user.id == $user.id) return next(error('forbidden','operation'))
         const deleted = await param.user
             .$query()
