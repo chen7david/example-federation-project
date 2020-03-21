@@ -20,7 +20,7 @@ module.exports = {
     create: async (req, res, next) => {
         const { cargo, info } = req.tools
         const { param, body } = req.ctx
-        const permission = await param.permission
+        const permission = await param.community
             .$relatedQuery('permissions')
             .insert(body)
             .returning('*')
