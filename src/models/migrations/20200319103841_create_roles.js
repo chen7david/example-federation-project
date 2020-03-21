@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.unique(['community_id', 'name'])
     table.string('name').notNullable()
     table.text('description')
+    table.boolean('root').defaultTo(false)
     table.integer('community_id').references('id').inTable('communities').onDelete('CASCADE').index().notNullable()
     table.timestamps(true, true)
   })

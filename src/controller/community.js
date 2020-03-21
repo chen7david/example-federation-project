@@ -19,13 +19,14 @@ module.exports = {
     },
 
     create: async (req, res, next) => {
-        const { cargo } = req.tools
+        const { cargo, info } = req.tools
         const { $user, body } = req.ctx
         const community = await $user.community.cluster
             .$relatedQuery('communities')
             .insert(body)
             .returning('*')
         cargo.payload(community) 
+        cargo.details(info('created', 'community').render())
         res.status(200).json(cargo)
     },
 

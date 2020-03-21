@@ -18,13 +18,14 @@ module.exports = {
     },
 
     create: async (req, res, next) => {
-        const { cargo } = req.tools
+        const { cargo, info } = req.tools
         const { param, body } = req.ctx
         const user = await param.community
             .$relatedQuery('users')
             .insert(body)
             .returning('*')
         cargo.payload(user)
+        cargo.details(info('created', 'user').render())
         res.status(201).json(cargo)
     },
 
