@@ -19,11 +19,23 @@ module.exports = {
 
     create: async (req, res, next) => {
         const { cargo } = req.tools
-        res.status(200).json(cargo)
+        const { param, body } = req.ctx
+        const user = await param.community
+            .$relatedQuery('users')
+            .insert(body)
+            .returning('*')
+        cargo.payload(user)
+        res.status(201).json(cargo)
     },
 
     patch: async (req, res, next) => {
         const { cargo } = req.tools
+        const { param, body } = req.ctx
+        const user = await param.user
+            .$query()
+            .patch(body)
+            .returning('*')
+        cargo.payload(user)
         res.status(200).json(cargo)
     },
 

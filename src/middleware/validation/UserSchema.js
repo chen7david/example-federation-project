@@ -11,8 +11,8 @@ module.exports = {
     }),
 
     update: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
-        username: Joi.string().lowercase().required(),
-        password: Joi.string().min(6).max(120).required(),
+        username: Joi.string().lowercase(),
+        password: Joi.string().min(6).max(120),
         verified: Joi.boolean(),
         disabled: Joi.boolean(),
     }),

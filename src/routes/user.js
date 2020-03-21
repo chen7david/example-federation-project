@@ -10,10 +10,10 @@ router.param('userId', objectById(User))
 
 router.route('/auth/community/:communityId/users')
     .get(controller.index)
-    // .get(validateBody(schema.tenant.create), controller.index)
+    .post(validateBody(schema.user.create), controller.create)
 
 router.route('/auth/community/:communityId/users/:userId')
     .get(controller.view)
-    // .get(validateBody(schema.tenant.create), controller.index)
+    .patch(validateBody(schema.user.update), controller.patch)
 
 module.exports = router

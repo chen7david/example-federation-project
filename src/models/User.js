@@ -13,7 +13,7 @@ class User extends Model {
     }
  
     async $beforeUpdate(context){
-        await super.$beforeInsert(context)
+        await super.$beforeUpdate(context)
         if(this.password) this.password = await bcrypt
             .hash(this.password, BCRYPT_ROUNDS)
     }
