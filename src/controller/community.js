@@ -42,8 +42,9 @@ module.exports = {
     },
 
     delete: async (req, res, next) => {
-        const { cargo, info } = req.tools
+        const { cargo, info, error } = req.tools
         const { param } = req.ctx
+        if(param.community.root) return next(error('invalid',''))
         const deleted = await param.community
             .$query()
             .delete()
