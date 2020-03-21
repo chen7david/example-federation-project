@@ -24,21 +24,26 @@ module.exports = {
 
     objectById: (Model) => async (req, res, next, id) => { 
         try {
+
+            dd('count me ...')
             let key = Model.name.toLowerCase()
             let object = null
             let children = [ 'user', 'role', 'permission', 'token']
             const { $user } = req.ctx
-            if(key = 'cluster') object = await Model.getById(id)
-            if(key = 'community') object = await $user.community.cluster
+            if(key == 'cluster') object = await Model.getById(id)
+            if(key == 'community') object = await $user.community.cluster
                 .$relatedQuery('communities')
                 .where('id', id)
                 .first()
-            if(children.includes(key)) object = await Model
+            if(children.includes(key)) {
+                const { param } = req.ctx
+                object = await Model
                 .query()
-                .where('id', 'id')
-                .andWhere('community_id', $user.community_id)
+                .where('id', id)
+                .andWhere('community_id', param.community.id)
                 .first()
-                
+            }
+            dd({object, key, community_id:$user.community_id})    
             if(!object) {
                 const { error } = req.tools
                 next(error('invalid', key + ' id'))
