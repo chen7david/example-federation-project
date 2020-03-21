@@ -65,10 +65,13 @@ module.exports = {
 
     syncRoles: async (req, res, next) => {
         const { cargo, info, error } = req.tools
-        const { param, body } = req.ctx
-        dd({body})
-        const roles = await param.user.$sync('roles', body.roleIds)
-        dd(roles)
+        const { $user, param, body } = req.ctx
+        const roleIds = body.roleIds.map(el => parseInt(el, 10))
+        const roles = await param.user.$sync('roles', roleIds)
+        let universe = await $user.community.$relatedQuery('roles')
+        universe = universe.map(el=> el.id)
+        const sync = roleIds.filter(el => universe.includes(el))
+        dd({universe, roleIds, sync})
         cargo.payload({deleted: true}) 
         cargo.details(info('updated', 'user-roles').render())
         res.status(200).json(cargo)
