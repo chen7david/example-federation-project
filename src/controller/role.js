@@ -79,26 +79,27 @@ module.exports = {
     },
 
     getPermissions: async (req, res, next) => {
-        const { cargo, info, error } = req.tools
+        const { cargo } = req.tools
         const { param } = req.ctx
-        if(param.role.root) return next(error('forbidden','operation'))
-        const deleted = await param.role
-            .$query()
-            .delete()
-        cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'role').render())
+        const permissions = await param.role
+            .$relatedQuery('permissions')
+        cargo.payload(permissions) 
         res.status(200).json(cargo)
     },
 
     syncPermissions: async (req, res, next) => {
-        const { cargo, info, error } = req.tools
-        const { param } = req.ctx
-        if(param.role.root) return next(error('forbidden','operation'))
-        const deleted = await param.role
-            .$query()
-            .delete()
-        cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'role').render())
+        const { cargo, info } = req.tools
+        const { param, body } = req.ctx
+
+        let target = await param.community
+            .$relatedQuery('permissions')
+            .whereIn('id', body.permissionIds)
+
+        const permissions = await param.role
+            .$sync('permissions', target.map(el => el.id))
+        
+        cargo.payload({synced: true}) 
+        cargo.details(info('updated', 'role-permissions').render())
         res.status(200).json(cargo)
     },
 }
