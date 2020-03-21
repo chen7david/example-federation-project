@@ -34,14 +34,21 @@ module.exports = {
         const { param, body } = req.ctx
         const community = await param.community
             .$query()
-            .patch(body).returning('*')
+            .patch(body)
+            .returning('*')
         cargo.payload(community) 
         cargo.details(info('updated', 'community').render())
         res.status(200).json(cargo)
     },
 
     delete: async (req, res, next) => {
-        const { cargo } = req.tools
+        const { cargo, info } = req.tools
+        const { param } = req.ctx
+        const deleted = await param.community
+            .$query()
+            .delete()
+        cargo.payload({deleted: true}) 
+        cargo.details(info('deleted', 'community').render())
         res.status(200).json(cargo)
     },
 }
