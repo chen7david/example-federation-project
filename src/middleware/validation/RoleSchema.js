@@ -14,7 +14,7 @@ module.exports = {
     }),
 
     syncUsers: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
-        userIds: Joi.array(),
+        userIds: Joi.array().required(),
     }),
 
     syncPermissions: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({

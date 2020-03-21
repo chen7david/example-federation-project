@@ -20,6 +20,6 @@ router.route('/auth/community/:communityId/permissions/:permissionId')
 
 router.route('/auth/community/:communityId/permission-roles/:permissionId')
     .get(controller.getRoles)
-    .patch(validateBody(schema.user.syncPermissions), controller.syncRoles)
+    .patch(validateBody(schema.permission.syncRoles), controller.syncRoles)
 
 module.exports = router

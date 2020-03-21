@@ -54,26 +54,27 @@ module.exports = {
     },
 
     getUsers: async (req, res, next) => {
-        const { cargo, info, error } = req.tools
+        const { cargo } = req.tools
         const { param } = req.ctx
-        if(param.role.root) return next(error('forbidden','operation'))
-        const deleted = await param.role
-            .$query()
-            .delete()
-        cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'role').render())
+        const users = await param.role
+            .$relatedQuery('users')
+        cargo.payload(users) 
         res.status(200).json(cargo)
     },
 
     syncUsers: async (req, res, next) => {
-        const { cargo, info, error } = req.tools
-        const { param } = req.ctx
-        if(param.role.root) return next(error('forbidden','operation'))
-        const deleted = await param.role
-            .$query()
-            .delete()
-        cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'role').render())
+        const { cargo, info } = req.tools
+        const { param, body } = req.ctx
+
+        let target = await param.community
+            .$relatedQuery('users')
+            .whereIn('id', body.userIds)
+
+        const users = await param.role
+            .$sync('users', target.map(el => el.id))
+        
+        cargo.payload({synced: true}) 
+        cargo.details(info('updated', 'role-users').render())
         res.status(200).json(cargo)
     },
 

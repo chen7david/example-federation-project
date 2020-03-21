@@ -53,24 +53,27 @@ module.exports = {
     },
 
     getRoles: async (req, res, next) => {
-        const { cargo, info, error } = req.tools
+        const { cargo } = req.tools
         const { param } = req.ctx
-        const deleted = await param.permission
-            .$query()
-            .delete()
-        cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'permission').render())
+        const roles = await param.permission
+            .$relatedQuery('roles')
+        cargo.payload(roles) 
         res.status(200).json(cargo)
     },
 
     syncRoles: async (req, res, next) => {
         const { cargo, info, error } = req.tools
-        const { param } = req.ctx
-        const deleted = await param.permission
-            .$query()
-            .delete()
-        cargo.payload({deleted: true}) 
-        cargo.details(info('deleted', 'permission').render())
+        const { param, body } = req.ctx
+
+        let target = await param.community
+            .$relatedQuery('roles')
+            .whereIn('id', body.roleIds)
+
+        const roles = await param.permission
+            .$sync('roles', target.map(el => el.id))
+        
+        cargo.payload({synced: true}) 
+        cargo.details(info('updated', 'user-roles').render())
         res.status(200).json(cargo)
     },
 }
