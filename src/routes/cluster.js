@@ -1,6 +1,6 @@
 const router = require('express-promise-router')()
 const controller = require('./../controller/cluster')
-const { objectById, testLoader } = require('./../middleware/loaders')
+const { objectById } = require('./../middleware/loaders')
 const { Cluster } = require('./../models')
 const { validateBody, schema } = require('../middleware/validation')
 

@@ -12,11 +12,11 @@ module.exports = {
     },
 
     view: async (req, res, next) => {
-        const { cargo } = req.tools
-        const { $user } = req.ctx
-        const communities = await $user.community.cluster
-            .$relatedQuery('communities')
-        cargo.payload(communities) 
+        const { cargo, error } = req.tools
+        const { $user, param } = req.ctx
+        if(param.community.cluster_id !== $user.community.cluster_id)
+            return next(error('invalid', 'community id'))
+        cargo.payload(param.community) 
         res.status(200).json(cargo)
     },
 
@@ -33,6 +33,7 @@ module.exports = {
 
     patch: async (req, res, next) => {
         const { cargo } = req.tools
+        const { $user, body, param } = req.ctx
         res.status(200).json(cargo)
     },
 
