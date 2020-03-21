@@ -24,8 +24,6 @@ module.exports = {
 
     objectById: (Model) => async (req, res, next, id) => { 
         try {
-
-            dd('count me ...')
             let key = Model.name.toLowerCase()
             let object = null
             let children = [ 'user', 'role', 'permission', 'token']
