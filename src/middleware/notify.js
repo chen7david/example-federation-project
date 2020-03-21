@@ -8,7 +8,7 @@ const schema = new SchemaBuilder().merege({
     ObjectionSchema: ObjectionSchema(SchemaBuilder),
 })
 
-console.log(schema.keys())
+// console.log(schema.keys())
 
 const instance = () => new Notify(schema)
 const notifyStatusTo = require('express-notify-io')(instance)
