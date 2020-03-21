@@ -65,7 +65,7 @@ module.exports = {
 
     syncRoles: async (req, res, next) => {
         const { cargo, info, error } = req.tools
-        const { $user, param, body } = req.ctx
+        const { param, body } = req.ctx
 
         let target = await param.community
             .$relatedQuery('roles')
@@ -74,7 +74,6 @@ module.exports = {
         const roles = await param.user
             .$sync('roles', target.map(el => el.id))
         
-        dd({target, roles})
         cargo.payload({synced: true}) 
         cargo.details(info('updated', 'user-roles').render())
         res.status(200).json(cargo)
