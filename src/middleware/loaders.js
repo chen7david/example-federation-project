@@ -13,7 +13,7 @@ module.exports = {
         try {
             if(!req.ctx) req.ctx = {}
             const { error } = req.tools
-            const user = await User.getEagerByKey('userId', 'US3XBAUU1VCX')
+            const user = await User.getEagerByKey('userId', 'US1SYSSDC4ME')
             if(!user) return next(error('invalid', 'user id'))
             req.ctx.$user = user
             return next()
