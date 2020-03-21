@@ -12,10 +12,8 @@ module.exports = {
     },
 
     view: async (req, res, next) => {
-        const { cargo, error } = req.tools
-        const { $user, param } = req.ctx
-        if(param.community.cluster_id !== $user.community.cluster_id)
-            return next(error('invalid', 'community id'))
+        const { cargo } = req.tools
+        const { param } = req.ctx
         cargo.payload(param.community) 
         res.status(200).json(cargo)
     },
@@ -32,8 +30,13 @@ module.exports = {
     },
 
     patch: async (req, res, next) => {
-        const { cargo } = req.tools
-        const { $user, body, param } = req.ctx
+        const { cargo, info } = req.tools
+        const { param, body } = req.ctx
+        const community = await param.community
+            .$query()
+            .patch(body).returning('*')
+        cargo.payload(community) 
+        cargo.details(info('updated', 'community').render())
         res.status(200).json(cargo)
     },
 

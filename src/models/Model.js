@@ -18,7 +18,8 @@ class BaseModel extends OM(Model) {
     $formatJson(json) {
         json = super.$formatJson(json)
         delete json.user_id
-        delete json.password
+        delete json.cluster_id
+        delete json.password        
         json.created_at = json.created_at.toLocaleString()
         json.updated_at = json.updated_at.toLocaleString()
         return json
