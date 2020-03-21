@@ -17,9 +17,7 @@ module.exports = {
         disabled: Joi.boolean(),
     }),
 
-    login: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
-        username: Joi.string().lowercase().required(),
-        password: Joi.string().min(6).required(),
-    })
-    
+    syncRoles: Joi.object().options({abortEarly: false, stripUnknown: true}).keys({
+        roleIds: Joi.array(),
+    }),    
 }

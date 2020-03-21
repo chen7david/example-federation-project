@@ -4,6 +4,10 @@ const schema = {
     cluster: require('./ClusterSchema'),
     community: require('./CommunitySchema'),
     user: require('./UserSchema'),
+    role: require('./RoleSchema'),
+    permission: require('./PermissionSchema'),
+    token: require('./TokenSchema'),
+    account: require('./AccountSchema'),
 }
 
 module.exports = {
