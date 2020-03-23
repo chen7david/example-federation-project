@@ -1,7 +1,9 @@
 const Model = require('./Model')
 const bcrypt = require('bcrypt')
+const JWT = require('jsonwebtoken')
 const BCRYPT_ROUNDS = 12
 const { serialChar } = require('funx-js')
+
 
 class User extends Model {
  
