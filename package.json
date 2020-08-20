@@ -21,7 +21,7 @@
   "homepage": "https://github.com/chen7david/example-federation-project#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "cargo-io": "latest",
     "cors": "latest",
     "express": "^4.17.1",
